@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { connect, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { contactsActions } from '../../redux/actions'
 import style from './form.module.css';
 
 
-function Form({ onSubmit }) {  
+function Form() {  
   const contacts = useSelector(state => state.contacts.items);
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -17,6 +18,7 @@ function Form({ onSubmit }) {
     const {value } = event.currentTarget;
     setNumber(value);
   }
+  const onSubmit = (name, number) => dispatch(contactsActions.addContact(name, number));
   const handleSubmit = (event) => {
     event.preventDefault();
     const availabСheck = contacts.find(arr => arr.name === name);
@@ -60,7 +62,5 @@ function Form({ onSubmit }) {
       </form>
     );
 }
-const mapDispatchToProps = dispatch => ({
-  onSubmit: (name, number) => dispatch(contactsActions.addContact(name, number)),
-})
-export default connect(null, mapDispatchToProps)(Form);
+
+export default Form;

@@ -1,7 +1,7 @@
 import style from './contactList.module.css';
 import { ContactItem } from './ContactItem';
 import { connect } from 'react-redux';
-import contactsAction from '../../redux/actions'
+import { contactsActions } from '../../redux/actions'
 
 const ContactList = ({ filterContacts, clickDelete}) => { 
     return <ul className={ style.list}>
@@ -25,7 +25,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    clickDelete: (id) => dispatch(contactsAction.clickDelete(id)),
+    clickDelete: (id) => dispatch(contactsActions.clickDelete(id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

@@ -1,6 +1,6 @@
 import style from './filter.module.css';
 import { connect } from 'react-redux';
-import contactsAction from '../../redux/actions'
+import { contactsActions } from '../../redux/actions'
 
 const Filter = ({ value, onChange }) => { 
     return <label className={ style.label}>Find contacts by name
@@ -21,7 +21,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    onChange: (event) => dispatch(contactsAction.changeFilter(event.target.value)),
+    onChange: (event) => dispatch(contactsActions.changeFilter(event.target.value)),
 })
 
 export default connect(mapStateToProps,  mapDispatchToProps)(Filter);

@@ -1,11 +1,11 @@
-import { number } from "prop-types";
 import { useState } from "react";
-import { connect } from "react-redux";
-import contactsActions from '../../redux/actions'
+import { connect, useSelector } from "react-redux";
+import { contactsActions } from '../../redux/actions'
 import style from './form.module.css';
 
 
 function Form({ onSubmit }) {  
+  const contacts = useSelector(state => state.contacts.items);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -19,6 +19,13 @@ function Form({ onSubmit }) {
   }
   const handleSubmit = (event) => {
     event.preventDefault();
+    const availabСheck = contacts.find(arr => arr.name === name);
+    if (availabСheck) {
+      alert(`${availabСheck.name} is alredy in contact`);
+      setName('');
+      setNumber('');
+      return;
+    }
     onSubmit(name, number);
     setName('');
     setNumber('');
